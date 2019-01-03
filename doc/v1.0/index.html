@@ -1,0 +1,367 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section>
+                <h1>Introduction to Docker</h1>
+                <h3>Jan. 2019</h3>
+                <p>
+                    <!-- <small>Created by Sherman XIE</a></small> -->
+                </p>
+            </section>
+            <section>
+                <h2>Agenda</h2>
+                <h5></h5>
+                <p>
+                    <ul>
+                        <li>What is Docker?</li>
+                        <li>Installing Docker & Docker Composer</li>
+                        <li>Docker</li>
+                        <li>Docker Compose</li>
+                        <li>Docker Base Continuous Integration</li>
+                    </ul>
+                </p>
+            </section>
+            <section>
+                <section>
+                    <h2>What is Docker?</h2>
+                    <p style="text-align: left">
+                        Docker is an open-source project that automates the deployment of applications inside software
+                        containers, by providing an additional layer of abstraction and automation of operating
+                        system–level virtualization on Linux. <strong>en.wikipedia.org</strong>
+                    </p>
+                </section>
+                <section>
+                    <h4>Package Software into Standardized Units for Development, Shipment and Deployment</h4>
+                    <div style="display: inline-flex;">
+                        <img width="400px" height="400px" src="https://www.docker.com/sites/default/files/d8/styles/large/public/2018-11/container-what-is-container.png?itok=vle7kjDj" />
+                        <div width="400px" height="400px" style="margin:20px">
+                            <small>
+                                <ul>
+                                    <li>
+                                        <strong>Standard</strong> Docker created the industry standard for containers,
+                                        so
+                                        they
+                                        could be portable anywhere </li>
+                                    <li> <strong>Lightweight</strong> Containers share the machine’s OS system kernel
+                                        and
+                                        therefore do not require an OS per application, driving higher server
+                                        efficiencies
+                                        and
+                                        reducing
+                                        server and licensing costs
+                                    </li>
+                                    <li><strong>Secure</strong> Applications are safer in containers and Docker
+                                        provides
+                                        the
+                                        strongest default isolation capabilities in the industry
+                                    </li>
+                                </ul>
+                            </small></div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3> Docker Containers Are Everywhere: Linux, Windows, Data center, Cloud, Serverless, etc.</h3>
+                    <p>
+                        <img width="400" height="400" src="https://www.docker.com//sites/default/files/d8/styles/large/public/2018-11/Docker-Website-2018-Diagrams-071918-V5_26_Docker-today.png?itok=-N_HRaz2">
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Comparing Containers and Virtual Machines</h3>
+                    <p>
+                        <img width="400px" height="400px" src="https://www.docker.com/sites/default/files/d8/2018-11/docker-containerized-appliction-blue-border_2.png">
+                        <img width="400px" height="400px" src="https://www.docker.com/sites/default/files/d8/2018-11/container-vm-whatcontainer_2.png"
+                            alt="">
+                    </p>
+                </section>
+                <section>
+                    <p>
+
+                        <strong>Containers</strong>
+                        <small>
+                            are an abstraction at the app layer that packages code and dependencies together.
+                            Multiple containers can run on the same machine and share the OS kernel with other
+                            containers, each running as isolated processes in user space. Containers take up
+                            less
+                            space than VMs (container images are typically tens of MBs in size), can handle
+                            more
+                            applications and require fewer VMs and Operating systems.
+                        </small>
+                    </p>
+                    <br />
+                    <p>
+                        <strong>Virtual machines (VMs)</strong>
+                        <small>
+                            are an abstraction of physical hardware turning one server into many servers. The
+                            hypervisor allows multiple VMs to run on a single machine. Each VM includes a full
+                            copy
+                            of an operating system, the application, necessary binaries and libraries - taking
+                            up
+                            tens of GBs. VMs can also be slow to boot.
+                        </small>
+                    </p>
+                </section>
+                <section>
+                    <img class="img" width="800px" height="600px" src="http://static.open-open.com/news/uploadImg/20150331/20150331093145_189.png" />
+                </section>
+
+            </section>
+            <section>
+                <section>
+                    <h2>Installing Docker & Docker Composer</h2>
+                    <p>
+                        <a href="https://docs.docker.com/docker-for-mac/install/">Install Docker for Mac</a>:
+                        <br>
+                        <ul>
+                            <li> <code>brew cask install docker </code> # Install Docker</li>
+                            <li> <code>open /Applications/Docker.app </code> # Start Docker</li>
+                        </ul>
+                    </p>
+                </section>
+                <section>
+                    <h2> Are we there yet?</h2>
+                    <p>
+                        <ul>
+                            <li> <code>$ docker version</code> </li>
+                            <li> <code>$ docker info</code> </li>
+                            <li> <code>$ docker-compose version</code> </li>
+                            <li> <code>$ docker search xxx</code> </li>
+                            <li> <code>$ docker pull xxx</code> </li>
+                        </ul>
+                    </p>
+                </section>
+                <section>
+                    <h2>Docker Diagram</h2>
+                    <img src="https://www.researchgate.net/profile/Yahya_Al-Dhuraibi/publication/308050257/figure/fig1/AS:433709594746881@1480415833510/High-level-overview-of-Docker-architecture.png"
+                        alt="Image result for Commands are executed on the client docker">
+                </section>
+                <section>
+                    <h2> Visual Code Extensions</h2>
+                    <p>
+                        <img height="400px" src="https://scotch-res.cloudinary.com/image/upload/dpr_3,w_350,q_auto:good,f_auto/media/303/jVCzWCKQ3irIw1FrooHR_Screen%20Shot%202018-07-28%20at%2014.40.32.png">
+                    </p>
+                </section>
+                <section>
+                    <h2> Visual Code Extensions</h2>
+                    <p><img height="400px" alt="Image result for docker compose vscode extensions" src="https://code.visualstudio.com/assets/docs/azure/docker/dockercommands.gif" />
+                    </p>
+                </section>
+            </section>
+            <section>
+
+                <section>
+                    <h2>Hello World </h2>
+
+                    <div style="text-align:left">
+                        <strong>Simple Command - Ad-Hoc Container</strong> <small>
+                            <ul>
+                                <li> <code class="hljs">$ docker run ubuntu:14.04 echo "Hello World" </code></li>
+                                <li> <code class="hljs">$ docker images ls </code></li>
+                                <li> <code class="hljs">$ docker ps –a 
+                                    <small>The second run should be faster because there is no download</small>
+                            </code></li>
+                            </ul>
+                        </small>
+
+                        <br />
+                        <strong>Run a container with a terminal</strong>
+                        <small>
+                            <ul>
+                                <li><code class="hljs">$ docker run -i -t ubuntu:14.04 /bin/bash
+                                    <small> -i flag tells docker to connect to STDIN on the container </small>
+                                    <br />
+                                    <small> -t flag specifies to get a pseudo-terminal</small>
+                            </code></li>
+
+                            </ul>
+                        </small>
+                    </div>
+                </section>
+                <section>
+                    <h2>Terminology - Image
+                    </h2>
+                    <div style="text-align:left">
+                        <strong>Persistent snapshot that can be run</strong>
+                        <small>
+                            <ul>
+                                <li><code class="hljs">$ docker image ls: List all local images</code></li>
+                                <li><code class="hljs">$ docker run: Create a container from an image and execute a command in it</code></li>
+                                <li><code class="hljs">$ docker tag: Tag an image</code></li>
+                                <li><code class="hljs">$ docker pull: Download image from repository</code></li>
+                            </ul>
+                        </small>
+                    </div>
+                </section>
+                <section>
+                    <h2>Terminology - Container
+                    </h2>
+                    <div style="text-align:left">
+                        <strong>Runnable instance of an image</strong>
+                        <small>
+                            <ul>
+                                <li> <code class="hljs">$ docker ps: List all running containers</code></li>
+                                <li> <code class="hljs">$ docker ps –a: List all containers (incl. stopped)</code></li>
+                                <li> <code class="hljs">$ docker top: Display processes of a container</code></li>
+                                <li> <code class="hljs">$ docker start: Start a stopped container</code></li>
+                                <li> <code class="hljs">$ docker stop: Stop a running container</code></li>
+                                <li> <code class="hljs">$ docker pause: Pause all processes within a container</code></li>
+                                <li> <code class="hljs">$ docker rm: Delete a container</code></li>
+                                <li> <code class="hljs">$ docker commit: Create an image from a container</code></li>
+                            </ul>
+                        </small>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Mount Volumes
+                    </h2>
+                    <p>
+                        <ul>
+                            <li> <code class="hljs">$ docker run –ti –v /hostLog:/log ubuntu </code></li>
+                            <li> Run second container: Volume can be shared</li>
+                            <li> <code class="hljs">$ docker run –ti --volumes-from firstContainerName ubuntu</code></li>
+                        </ul>
+                    </p>
+                </section>
+                <section>
+                    <h2>Publish Port
+                    </h2>
+                    <h5></h5>
+                    <p>
+                        <ul>
+                            <li><code class="hljs">$ docker run –t –p 8080:80 ubuntu nc –l 80</code>
+                                <ul>
+                                    <li>
+                                        Map container port 80 to host port 8080
+
+                                    </li>
+                                    <li> Check on host: nc localhost 8080</li>
+                                </ul>
+                            </li>
+
+                            <li> Link with other docker container<ul>
+                                    <li><code class="hljs">$ docker run -ti --link containerName:alias ubuntu</code></li>
+                                    <li> See link info with set</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </p>
+                </section>
+                <section>
+                    <img class="img" width="800px" height="600px" src="https://image.slidesharecdn.com/dockerintroduction-140813022440-phpapp01/95/docker-introduction-16-638.jpg" />
+                </section>
+                <section>
+                    <img class="img" width="800px" height="600px" src="https://image.slidesharecdn.com/dockerintroduction-140813022440-phpapp01/95/docker-introduction-15-638.jpg" />
+                </section>
+                <section>
+                    <h2>Docker File
+                    </h2>
+                    <h5></h5>
+                    <p>
+                        <ul>
+                            <li> Create images automatically using a build script: «Dockerfile»</li>
+                            <li> Can be versioned in a version control system like Git or SVN, along with all
+                                dependencies</li>
+                            <li> Docker Hub can automatically build images based on dockerfiles on Github</li>
+                        </ul>
+                        <a href="https://github.com/pwccnhk/common-auth/blob/master/.Dockerfile">Sample Docker file</a>
+                    </p>
+                </section>
+                <section>
+                    <img class="img" width="800px" height="600px" src="http://blog.jayway.com/wp-content/uploads/2015/03/dockerfile-commands.png" />
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img class="img" height="400px" src="https://image.slidesharecdn.com/dockerworkshop-151111133348-lva1-app6891/95/docker-19-workshop-17-638.jpg" />
+
+                </section>
+                <section data-markdown>
+                    ## When to Use Docker Compose?
+
+                    - Prototyping and Development
+                    + _Define Docker Compose Environment: Use docker-compose.yml to define the services in the
+                    application._
+                    + _Run Application: Use docker-compose up to run the multi-container application._
+                    - Testing and Automating Processes
+                    + _Application Environment: Use Dockerfile to define the app environment to make it easily
+                    reproducible._
+                    - Future Production Deployment
+                </section>
+                <section>
+                    <img class="img" height="400px" src="https://linuxhint.com/wp-content/uploads/2017/10/command.png">
+                </section>
+                <section>
+                    <h2> Example</h2>
+                    <a href="https://github.com/pwccnhk/common-auth/blob/master/docker-compose.yml">Example Docker
+                        compose file</a>
+                </section>
+            </section>
+
+            <section>
+                <h2> Docker based CI
+                </h2>
+
+                <img class="img" height="400px" src="https://i0.wp.com/blog.docker.com/wp-content/uploads/4fa92c35-5a00-4e7a-929e-e5ae4b99701a-1.jpg"
+                    alt="Image result for docker base ci" style="margin-top: 20px;">
+            </section>
+            <section>
+                <h2> Q & A
+                </h2>
+            </section>
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+        // More info about config & dependencies:
+        // - https://github.com/hakimel/reveal.js#configuration
+        // - https://github.com/hakimel/reveal.js#dependencies
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+            dependencies: [
+                { src: 'plugin/markdown/marked.js' },
+                { src: 'plugin/markdown/markdown.js' },
+                { src: 'plugin/notes/notes.js', async: true },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+            ]
+        });
+    </script>
+</body>
+
+</html>
